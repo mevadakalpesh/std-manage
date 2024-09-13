@@ -89,4 +89,13 @@ class StudentService
             where: $where
         );
     }
+    
+    public function updateOrCreateStudent(array $where = [], array $data = [])
+    {
+        return $this->studentRepository->updateOrCreate(
+            where: $where,
+            data: $data
+        );
+    }
+    
 }

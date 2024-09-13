@@ -88,4 +88,10 @@ class StudentRepositoryClass implements StudentRepositoryInterface
                ->where($where)
                ->delete();
     }
+    
+    public function updateOrCreate(array $where = [],array $data = [])
+    {
+        return $this->model->updateOrCreate($where,$data);
+    }
+    
 }

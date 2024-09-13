@@ -9,4 +9,5 @@ interface StudentRepositoryInterface
     public function create(array $data = []);
     public function update(array $where = [], array $data = []);
     public function delete(array $where = []);
+    public function updateOrCreate(array $where = [],array $data = []);
 }

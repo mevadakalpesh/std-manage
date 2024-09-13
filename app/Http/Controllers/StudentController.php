@@ -7,6 +7,7 @@ use App\Service\StudentService;
 use App\Http\Requests\StudentAddRequest;
 use App\Http\Requests\StudentEditRequest;
 use Exception;
+use DB;
 
 class StudentController extends Controller
 {
@@ -25,11 +26,13 @@ class StudentController extends Controller
     public function store(StudentAddRequest $request)
     {
         try {
-            $this->studentService->createStudent([
-                'name' => $request->name,
-                'subject' => $request->subject,
-                'mark' => $request->mark
-            ]);
+            $this->studentService->updateOrCreateStudent(
+            where: [
+              'name' => $request->name,
+              'subject' => $request->subject
+            ],
+            data: ['mark' => DB::raw('mark +'. (int) $request->mark)]
+          );
             return back()->with('success', 'Student added successfully');
         } catch (Exception $e) {
             return back()->with('error', 'Server Error !');

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-
+use App\Rules\CheckNameRule;
 
 
 class StudentAddRequest extends FormRequest
@@ -26,17 +26,10 @@ class StudentAddRequest extends FormRequest
   public function rules(): array
   {
    return [
-      'name' => 'required|unique:students,name',
-      'mark' => 'required|integer',
-      'subject' => 'required|string',
+    'name' => ['required','string'],
+    'mark' => ['required','integer'],
+    'subject' => ['required','string'],
     ];
   }
 
-  // public function failedValidation(Validator $validator) {
-//     throw new HttpResponseException(response()->json([
-//       'status' => 101,
-//       'message' => $validator->errors()->first(),
-//       'result' => []
-//     ]));
-//   }
 }
